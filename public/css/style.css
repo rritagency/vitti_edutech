@@ -103,8 +103,9 @@ img {
 }
 
 .header__logo {
+  color: blueviolet;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 30px;
   text-decoration: none;
   grid-area: logo;
 }

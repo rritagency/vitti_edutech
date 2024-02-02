@@ -97,7 +97,7 @@ router.post('/register', async (req, res) => {
         if(error.code === 11000) {
           res.status(409).json({ message: 'User already in use'});
         }
-        res.status(500).json({ message: 'Internal server error'})
+        // res.status(500).json({ message: 'Internal server error'})
       }
   
     } catch (error) {
@@ -117,7 +117,7 @@ router.get('/dashboard', authMiddleware, async (req, res) => {
         description: 'Simple Blog created with NodeJs, Express & MongoDb.'
       }
   
-      const data = await Post.find();
+      const data = await Post.find().sort({ createdAt: -1 });
       res.render('admin/dashboard', {
         locals,
         data,
