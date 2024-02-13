@@ -13,8 +13,12 @@
   <label for="title"><b>Title</b></label>
   <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
 
-  <label for="body"><b>Content</b></label>
-  <textarea name="body" cols="50" rows="10"><%= data.body %></textarea>
+  <label for="marks"><b>Marks</b></label> 
+  <input type="number" placeholder="Exam Marks" name="marks" value="<%= data.marks %>">
+  <br>
+
+  <label for="link"><b>Link</b></label>
+  <input type="text" placeholder="Exam form link" name="link" value="<%= data.link %>">
 
   <input type="submit" value="Update" class="btn">
 

@@ -20,40 +20,18 @@
       margin: 10px;
     }
   </style>
-  <script>
-    function toggleForms() {
-      const signInForm = document.getElementById('signInForm');
-      const registerForm = document.getElementById('registerForm');
-
-      signInForm.classList.toggle('hide');
-      registerForm.classList.toggle('hide');
-    }
-  </script>
 </head>
 <body>
 
   <div class="container">
     <form id="signInForm" action="/admin" method="POST">
-      <h3>Log In</h3>
+      <h3>Admin Log In</h3>
       <label for="username"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="username">
       <label for="password"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password">
       <div class="btn-container">
         <input type="submit" value="Login" class="btn">
-        <button type="button" onclick="toggleForms()" class="btn">Register</button>
-      </div>
-    </form>
-
-    <form id="registerForm" action="/register" method="POST" class="hide">
-      <h3>Register</h3>
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username">
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password">
-      <div class="btn-container">
-        <input type="submit" value="Register" class="btn">
-        <button type="button" onclick="toggleForms()" class="btn">Log In</button>
       </div>
     </form>
   </div>

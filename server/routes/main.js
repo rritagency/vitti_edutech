@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
+const Student = require('../models/Student');
 
 // Routes
 
@@ -12,29 +13,17 @@ router.get('', async (req, res) => {
     try {
       // console.log(req.query);
       const locals = {
-        title: "NodeJs Blog",
+        title: "Vitti | Welcome",
         description: "Simple Blog created with NodeJs, Express & MongoDb."
       }
   
-      let perPage = 5;
-      let page = req.query.page || 1;
-  
-      const data = await Post.aggregate([ { $sort: { createdAt: -1 } } ])
-      .skip(perPage * page - perPage)
-      .limit(perPage)
-      .exec();
-  
-      // Count is deprecated - please use countDocuments
-      // const count = await Post.count();
-      const count = await Post.countDocuments({});
-      const nextPage = parseInt(page) + 1;
-      const hasNextPage = nextPage <= Math.ceil(count / perPage);
+      const data = await Post.aggregate([
+        { $sample: { size: 2 } }
+      ]);      
   
       res.render('index', { 
         locals,
         data,
-        current: page,
-        nextPage: hasNextPage ? nextPage : null,
         currentRoute: '/'
       });
   
@@ -43,6 +32,61 @@ router.get('', async (req, res) => {
     }
   
   });
+
+/**
+ * POST /
+ * HOME - Student Login
+*/
+router.post('/student-login', async (req, res) => {
+  try {
+    const { roll, phone } = req.body;
+
+    const student = await Student.findOne({ roll });
+
+    if (!student) {
+        return res.status(401).json({ message: 'Invalid Credentials' });
+    }
+
+    const isPhoneValid = phone === student.phone;
+
+    if (!isPhoneValid) {
+        return res.status(401).json({ message: 'Invalid Credentials' });
+    }
+
+    res.redirect('/student-page-of-all-posts');
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+/**
+ * GET /
+ * HOME - Student Login
+*/
+router.get('/student-page-of-all-posts', async (req, res) => {
+  try {
+    // console.log(req.query);
+    const locals = {
+      title: "Vitti | Welcome",
+      description: "Simple Blog created with NodeJs, Express & MongoDb."
+    }
+
+    const data = await Post.find();  
+
+    res.render('student-page', { 
+      locals,
+      data,
+      currentRoute: '/'
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+
+});
 
 
 /**

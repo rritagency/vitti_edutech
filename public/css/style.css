@@ -57,6 +57,29 @@ textarea {
 }
 
 
+.student_btn {
+  display: block;
+  padding: 10px 20px;
+  /* background-color: #4CAF50; */
+  color: blue;
+  text-align: center;
+  font-size: 26px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.student_btn:hover {
+  background-color: #45a049;
+}
+
+.student_btn:active {
+  background-color: #398439;
+}
+
+
 img {
   width: 100%;
   height: auto;
@@ -186,6 +209,12 @@ img {
   margin: 5px 0 40px 0;
 }
 
+.author__text{
+  color: blue;
+  font-size: var(--font-size-md);
+  margin: 5px 0 40px 0;
+}
+
 
 /* Home Article List */
 .articles__heading {
@@ -202,10 +231,16 @@ img {
   flex-direction: column;
 }
 
+.article-list__item span {
+  display: inline-block;
+  margin-right: 40px; /* Adjust as needed */
+}
+
+
 .article-list__date {
   font-size: 1rem;
   color: var(--gray);
-  width: 100px;
+  /* width: 100px; */
   display: inline-block;
   width: 260px;
 }
@@ -217,6 +252,37 @@ img {
   text-decoration: none;
   margin: 18px 0;
 }
+
+#studentLogin {
+  font-size: 32px;
+  color: #3ecb13; /* Choose your desired text color */
+  text-align: left;
+  margin-bottom: 20px; /* Adjust the margin bottom as needed */
+}
+
+
+.article-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.article-table th, .article-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.article-table th {
+  background-color: #f2f2f2;
+}
+
+.article-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.article-table tr:hover {
+  background-color: #ddd;
+}
+
 
 @media only screen and (min-width: 768px) {
   .article-ul li a {
@@ -296,6 +362,30 @@ img {
   justify-content: space-between;
   padding: 10px 0;
 }
+
+.admin-students {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-students th, .admin-students td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.admin-students th {
+  background-color: #f2f2f2;
+}
+
+.admin-students tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.admin-students tr:hover {
+  background-color: #ddd;
+}
+
 
 /* SeachBar */
 .searchBar {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Student = require('../models/Student');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -130,6 +131,30 @@ router.get('/dashboard', authMiddleware, async (req, res) => {
   
   });
 
+/*
+ * GET /
+ * Admin Student List
+*/
+router.get('/student-list', authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: 'Student List',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb.'
+    }
+
+    const data = await Student.find().sort({ roll:1 });
+    res.render('admin/student-list', {
+      locals,
+      data,
+      layout: adminLayout
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+
+});
+
 
 /**
  * GET /
@@ -164,7 +189,8 @@ router.get('/add-post', authMiddleware, async (req, res) => {
       try {
         const newPost = new Post({
           title: req.body.title,
-          body: req.body.body
+          marks: req.body.marks,
+          link: req.body.link,
         });
   
         await Post.create(newPost);
@@ -178,6 +204,49 @@ router.get('/add-post', authMiddleware, async (req, res) => {
     }
   });
 
+
+/**
+ * GET /
+ * Admin - Add New Student
+*/
+router.get('/add-student', authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: 'Add Student',
+      description: 'Simple Blog created with NodeJs, Express & MongoDb.'
+    }
+
+    const data = await Student.find();
+    res.render('admin/add-student', {
+      locals,
+      layout: adminLayout
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+
+});
+
+
+/**
+ * POST /
+ * Admin - Create New Post
+*/
+router.post('/add-student', authMiddleware, async (req, res) => {
+    try {
+      const newStudent = new Student({
+        name: req.body.name,
+        roll: req.body.roll,
+        phone: req.body.phone,
+      });
+
+      await Student.create(newStudent);
+      res.redirect('/student-list');
+    } catch (error) {
+      console.log(error);
+    }
+});
 
 /**
  * GET /
@@ -214,7 +283,8 @@ router.put('/edit-post/:id', authMiddleware, async (req, res) => {
   
       await Post.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
-        body: req.body.body,
+        marks: req.body.marks,
+        link: req.body.link,
         updatedAt: Date.now()
       });
   
@@ -240,6 +310,21 @@ router.delete('/delete-post/:id', authMiddleware, async (req, res) => {
     }
   
   });
+
+/**
+ * DELETE /
+ * Admin - Delete Student
+*/
+router.delete('/delete-student/:id', authMiddleware, async (req, res) => {
+
+  try {
+    await Student.deleteOne( { _id: req.params.id } );
+    res.redirect('/student-list');
+  } catch (error) {
+    console.log(error);
+  }
+
+});
 
 /**
  * GET /

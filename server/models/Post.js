@@ -7,7 +7,11 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    body: {
+    marks: {
+        type: Number,
+        required: true
+    },
+    link: {
         type: String,
         required: true
     },
