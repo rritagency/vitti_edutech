@@ -74,7 +74,7 @@ router.get('/student-page-of-all-posts', async (req, res) => {
       description: "Simple Blog created with NodeJs, Express & MongoDb."
     }
 
-    const data = await Post.find();  
+    const data = await Post.find().sort({ createdAt: -1 }); 
 
     res.render('student-page', { 
       locals,
