@@ -44,17 +44,18 @@
     <h2 class="articles__heading">Student Section</h2>
 
     <div>
-        <h3 id="studentLogin">Log In as Student</h3>
-        <form id="studentLoginForm" action="/student-login" method="POST" class="hide">
-            <label for="roll"><b>Roll</b></label>
-            <input type="text" placeholder="Enter Roll" name="roll">
-            <label for="phone"><b>Phone</b></label>
-            <input type="text" placeholder="Enter Phone Number" name="phone">
-            <div class="btn-container">
-            <input type="submit" value="Login" class="btn">
-            </div>
-        </form>
-    </div>
+      <h3 id="studentLogin">Log In as Student</h3>
+      <form id="studentLoginForm" action="/student-login" method="POST" onsubmit="return validateForm()" class="hide">
+          <label for="roll"><b>Roll</b></label>
+          <input type="text" placeholder="Enter Roll" name="roll" required>
+          <label for="phone"><b>Phone</b></label>
+          <input type="text" placeholder="Enter Phone Number" name="phone" pattern="\d{11}" title="Please enter 11 digits numeric phone number" required>
+          <div class="btn-container">
+              <input type="submit" value="Login" class="btn">
+          </div>
+      </form>
+  </div>
+  
 
     <a class="student_btn" href="https://forms.gle/BbM47MdPT9bc3b7D7"><h4>সব এক্সামে অংশ নিতে রেজিস্ট্রেশন করুন</h4></a>
 
@@ -74,4 +75,13 @@
       // Toggle the 'hide' class on the form element
       studentLoginForm.classList.toggle('hide');
     });
+
+    function validateForm() {
+          var phoneInput = document.forms["studentLoginForm"]["phone"].value;
+          if (!/\d{11}/.test(phoneInput)) {
+              alert("Please enter a 11-digit numeric phone number");
+              return false;
+          }
+          return true;
+      }
 </script>

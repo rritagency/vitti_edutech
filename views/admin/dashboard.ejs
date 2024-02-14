@@ -42,8 +42,8 @@
     <% data.forEach(post => { %>
      
       <li>
-        <a href="/post/<%= post._id %>">
-          <%= post.title %> &nearr;
+        <a href="<%= post.link %>">
+          <%= post.title %> = <%= post.marks %> marks &nearr;
         </a>
         <div class="admin-post-controls">
           <a href="/edit-post/<%= post._id %>" class="btn">Edit</a>

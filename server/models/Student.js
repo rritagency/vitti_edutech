@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
     roll:{
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
